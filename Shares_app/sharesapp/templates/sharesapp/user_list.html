@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block header %}<title> USER_LIST </title> {% endblock header %} 
+
+
+
+{% block content %}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto"> 
+          <ul class="nav justify-content-center mt-1">
+            <li class="nav-item">
+               <h3>Welcome ,{{ request.user}} {% comment %} Shows the user name who is currently logged in {% endcomment %}</h3>
+            </li>
+         </ul> 
+        </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12 ">
+        <body>
+            <table class="table  table-bordered border-primary mt-3">
+                <thead >
+                    <tr class="table-light">
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Joined date</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in userlist %}   
+                    <tr class="table-light">
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{ rec.id }}</td>
+                        <td>{{ rec.username }}</td>
+                        <td>{{ rec.date_joined }}</td>
+                        <td> <a class="btn btn-primary" href= "{% url 'SHARE_LIST' rec.id %}" > View </a> </td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+
+       </div>
+     </div>
+</div>
+{% endblock content %}

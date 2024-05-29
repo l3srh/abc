@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block header %}<title> SHARES_LIST </title>{% endblock header %} 
+
+{% block content %}
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">             
+          <ul class="nav justify-content-center mt-2">
+            <li class="nav-item">
+               <h4> User ID: {{id}}'s Share Dashboard</h4>
+            </li>
+          </ul> 
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <body>
+            <a button type="button" class="btn btn-warning" href="{% url 'USER_LOGS' id %}">USER LOGS </a>
+
+             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Buy Share $
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter Shares Details $$ </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form  action="" method="POST">
+                      {% csrf_token %}
+          
+                       <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Selected UserID</label> 
+                          <input type="number" class="form-control"  name="companyshare"  placeholder= {{id}} disabled>
+                      </div> 
+          
+                      <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Date</label>
+                          <input type="date" class="form-control"  name="date" placeholder="Date of purchase" required>
+                      </div>
+          
+                      <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">CompanyShare</label>
+                          <input type="text" class="form-control"  name="companyshare" placeholder="Name of company" required>
+                      </div>
+          
+                      <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Quantity</label>
+                          <input type="number" class="form-control" name="quantity" placeholder="Quantity" required>
+                      </div>
+          
+                      <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Price</label>
+                          <input type="number" class="form-control"  name="price" placeholder="price" required>
+                      </div>
+                      
+                      <div class="d-grid gap-2 mb-4">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+          
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          <a class="btn btn-primary" href= "{% url 'USER_LIST'  %}" >Back</a>
+            <table class="table table-bordered border-primary mt-3">
+                <thead>
+                    <tr class="table-light">
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">Share ID.</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">CompanyShare</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">price</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col ">Update Action</th>
+                    <th scope="col ">Delete Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in data %} 
+                    <tr class="table-light">
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{ record.s_id }}</td>
+                        <td>{{ record.date }}</td>
+                        <td>{{ record.companyshare }}</td>
+                        <td>{{ record.quantity }}</td>
+                        <td>{{ record.price }}</td>
+                        <td>{{ record.user_id_id }}</td>
+                        <td><a class="btn btn-warning " href= "{% url 'EDIT_SHARE' record.user_id_id record.s_id  %} " >Update </a></td>
+                        <td><a class="btn btn-danger" href= "{% url 'DEL_SHARE' record.user_id_id record.s_id  %} " >Delete </a></td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+       </div>
+     </div>
+</div>
+{% endblock content %}

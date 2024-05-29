@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block header %}<title> EDIT SHARE </title>{% endblock header %} 
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">             
+          <ul class="nav justify-content-center mt-3">
+            <li class="nav-item">
+               <h4>EDIT Shares</h4>
+            </li>
+          </ul> 
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <form  action="" method="POST">
+            {% csrf_token %}
+
+             <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Selected Share ID</label> 
+                <input type="number" class="form-control"  name="companyshare"  placeholder= {{eobj.s_id}}  disabled>
+            </div> 
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Date</label>
+                <input type="date" class="form-control"  name="date" value={{eobj.date}} required>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">CompanyShare</label>
+                <input type="text" class="form-control"  name="companyshare" value={{eobj.companyshare}} required>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Quantity</label>
+                <input type="number" class="form-control" name="quantity" value={{eobj.quantity}} required>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Price</label>
+                <input type="number" class="form-control"  name="price" value={{eobj.price}} required>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">User ID</label>
+                <input type="number" class="form-control"  name="price" placeholder={{eobj.user_id_id}} disabled>
+            </div>
+            
+            <div class="d-grid gap-2 mb-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+      
+    </div>
+</div>
+{% endblock content %}
